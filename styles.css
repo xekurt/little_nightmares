@@ -1,0 +1,479 @@
+/* Little Nightmares Presentation Theme - The Maw Edition */
+:root {
+  /* Palette - The Maw */
+  --maw-black: #05070a;
+  --maw-dark-blue: #0b1116;
+  --maw-murky-blue: #15202b;
+  --maw-shadow: #000000;
+
+  /* Palette - Six */
+  --six-yellow: #F5C71A;
+  /* The Raincoat */
+  --six-yellow-dim: #b38b00;
+  --six-glow: rgba(245, 199, 26, 0.4);
+
+  /* Palette - Text/Paper */
+  --paper-white: #e0e0e0;
+  --paper-dirty: #c4c4c4;
+  --accent-red: #8b0000;
+  /* The Lady / Violence */
+
+  /* Fonts */
+  --font-title: 'Cinzel Decorative', cursive;
+  --font-body: 'Special Elite', monospace;
+}
+
+/* Global Styles & Reset */
+html,
+body {
+  background-color: var(--maw-black);
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.reveal {
+  font-family: var(--font-body);
+  color: var(--paper-dirty);
+  background: radial-gradient(circle at center, var(--maw-dark-blue) 0%, var(--maw-black) 100%);
+}
+
+/* =========================================
+   ATMOSPHERIC EFFECTS
+   ========================================= */
+
+/* 1. The Sway (Simulating the ship movement) */
+@keyframes maw-sway {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  25% {
+    transform: rotate(0.2deg);
+  }
+
+  50% {
+    transform: rotate(0deg);
+  }
+
+  75% {
+    transform: rotate(-0.2deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.reveal {
+  font-family: var(--font-body);
+  color: var(--paper-dirty);
+  background: radial-gradient(circle at center, var(--maw-dark-blue) 0%, var(--maw-black) 100%);
+  /* Apply sway to the whole container to avoid conflicting with Reveal.js logical transforms on .slides */
+  animation: maw-sway 10s ease-in-out infinite;
+}
+
+.reveal .slides {
+  /* Let Reveal.js handle the layout logic */
+  text-align: center;
+}
+
+/* Removed manual flex/height forcing on section to let Reveal.js handle vertical centering */
+
+/* 2. Film Grain / Noise Overlay */
+
+/* 2. Film Grain / Noise Overlay */
+.noise-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* 3. Vignette Overlay (Claustrophobia) */
+.vignette-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 999;
+  background: radial-gradient(circle, transparent 40%, black 120%);
+}
+
+/* =========================================
+   TYPOGRAPHY
+   ========================================= */
+
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+  font-family: var(--font-title);
+  color: var(--six-yellow);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-shadow:
+    2px 2px 0px var(--maw-black),
+    0 0 15px rgba(0, 0, 0, 0.8);
+  margin-bottom: 0.4em;
+}
+
+.reveal h1 {
+  font-size: 1.5em;
+}
+
+.reveal h2 {
+  font-size: 1.0em;
+}
+
+.reveal h3 {
+  font-size: 0.8em;
+}
+
+.reveal p,
+.reveal ul,
+.reveal ol {
+  font-family: var(--font-body);
+  font-size: 0.65em;
+  line-height: 1.4;
+  text-shadow: 1px 1px 2px var(--maw-black);
+}
+
+.reveal strong {
+  color: var(--paper-white);
+  font-weight: bold;
+  text-decoration: underline;
+  /* Like a detective's note */
+  text-decoration-color: var(--six-yellow-dim);
+}
+
+.reveal em {
+  color: var(--six-yellow-dim);
+  font-style: italic;
+}
+
+.reveal ul {
+  list-style-type: none;
+  /* Custom markers */
+  margin-left: 0;
+  padding-left: 1em;
+}
+
+.reveal ul li {
+  margin-bottom: 0.4em;
+  position: relative;
+  padding-left: 1.5em;
+}
+
+.reveal ul li::before {
+  content: '👁';
+  /* The Eye Symbolism */
+  position: absolute;
+  left: 0;
+  color: var(--six-yellow);
+  font-size: 0.7em;
+  top: 0.2em;
+  opacity: 0.7;
+}
+
+/* =========================================
+   SPECIFIC SLIDE STYLES
+   ========================================= */
+
+/* Reusable Container Style ("Dossier" / "Photo" look) */
+.content-box,
+.overview-description,
+.platform-item,
+.question-item,
+.time-box,
+.reference-item,
+.warning-item {
+  background: rgba(11, 17, 22, 0.85);
+  border: 1px solid var(--maw-murky-blue);
+  box-shadow:
+    0 0 20px rgba(0, 0, 0, 0.8),
+    inset 0 0 30px rgba(0, 0, 0, 0.5);
+  /* Inner shadow for depth */
+  border-radius: 2px;
+  position: relative;
+  padding: 20px;
+}
+
+/* "Tape" decoration removed to clean up style */
+
+/* Cover Slide */
+.slide-cover .game-title {
+  font-family: 'Special Elite', cursive;
+  /* Scratchy/Handwritten look */
+  font-size: 2.0em;
+  /* Larger */
+  color: var(--six-yellow);
+  text-shadow:
+    0 0 10px var(--six-yellow-dim),
+    5px 5px 0px #000;
+  position: relative;
+  animation: glitch-anim 6s infinite;
+  margin-bottom: 20px;
+}
+
+.cover-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+@keyframes glitch-anim {
+  0% {
+    transform: skew(0deg);
+    text-shadow: 0 0 10px var(--six-yellow-dim), 5px 5px 0px #000;
+  }
+
+  90% {
+    transform: skew(0deg);
+    text-shadow: 0 0 10px var(--six-yellow-dim), 5px 5px 0px #000;
+  }
+
+  91% {
+    transform: skew(10deg);
+    text-shadow: -2px 0 0 red, 2px 0 0 blue;
+  }
+
+  92% {
+    transform: skew(-10deg);
+    text-shadow: -2px 0 0 blue, 2px 0 0 red;
+  }
+
+  93% {
+    transform: skew(0deg);
+    text-shadow: 0 0 10px var(--six-yellow-dim), 5px 5px 0px #000;
+  }
+
+  100% {
+    transform: skew(0deg);
+    text-shadow: 0 0 10px var(--six-yellow-dim), 5px 5px 0px #000;
+  }
+}
+
+/* Old flicker animation removed/replaced */
+
+/* End of Glitch Animation */
+
+.cover-image {
+  border: 5px solid var(--maw-black);
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.9);
+  filter: sepia(0.3) contrast(1.2) brightness(0.8);
+  transition: filter 1s ease;
+  width: 400px;
+  height: 400px;
+  /* Maintain aspect ratio */
+  display: block;
+  margin: 20px auto;
+  /* Center horizontally */
+}
+
+.cover-image img {
+  width: 100px;
+  height: 100px;
+}
+
+.cover-image:hover {
+  filter: sepia(0) contrast(1.1) brightness(1);
+}
+
+.cover-subtitle {
+  font-family: var(--font-body);
+  letter-spacing: 0.3em;
+  opacity: 0.7;
+}
+
+/* Overview Slide Alignment */
+.overview-content {
+  text-align: left;
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+/* Warning Slide */
+.slide-warning {
+  background: transparent;
+}
+
+.warning-container {
+  text-align: left;
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+.warning-title {
+  color: var(--accent-red) !important;
+  text-shadow: 0 0 20px #500000;
+}
+
+.warning-item {
+  border-left: 5px solid var(--accent-red);
+  margin-bottom: 20px;
+}
+
+/* Platforms Grid */
+.platforms-grid,
+.questions-container,
+.gametime-content,
+.references-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  justify-content: center;
+  gap: 20px;
+}
+
+.platform-item,
+.question-item,
+.time-box {
+  flex: 1 1 300px;
+  /* Responsive flex */
+  padding: 20px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.platform-item:hover,
+.question-item:hover,
+.time-box:hover {
+  transform: translateY(-5px) rotate(1deg);
+  /* Slight paper lift */
+  border-color: var(--six-yellow);
+  box-shadow: 0 0 20px rgba(245, 199, 26, 0.2);
+}
+
+.slide-platforms h3,
+.slide-questions h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Time Box Special */
+.playtime {
+  font-size: 2.5em;
+  font-family: var(--font-title);
+  color: var(--six-yellow);
+  border-bottom: 2px solid var(--maw-murky-blue);
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+/* Discussion List */
+.discussion-list ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.discussion-list li {
+  background: rgba(11, 17, 22, 0.85);
+  border: 1px solid var(--maw-murky-blue);
+  border-radius: 2px;
+  padding: 10px;
+  /* Reduced padding to fit slide */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  font-size: 0.9em;
+  /* Ensure readable */
+}
+
+.discussion-list li::before {
+  content: none;
+  /* Remove duplicate eye icon */
+}
+
+.discussion-list li:hover {
+  background: rgba(245, 199, 26, 0.1);
+  border-color: var(--six-yellow);
+  transform: translateY(-2px);
+}
+
+/* References */
+/* References */
+/* References - NEW GRID SYSTEM */
+
+.reference-item {
+  text-align: left;
+  padding: 15px;
+  /* Ensure internal padding */
+  display: flex;
+  flex-direction: column;
+}
+
+.reference-item h3 {
+  border-bottom: 1px solid var(--six-yellow-dim);
+  padding-bottom: 5px;
+  margin-bottom: 10px;
+  font-size: 0.8em;
+  /* Fixed size */
+  word-wrap: break-word;
+  /* Prevent overflow */
+}
+
+/* Fix inner lists */
+.reference-item ul {
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.reference-item ul li {
+  margin-bottom: 8px;
+  padding-left: 0 !important;
+  margin-left: 0 !important;
+  display: block;
+}
+
+/* Remove default eye icon from global scope */
+.reference-item ul li::before {
+  content: none !important;
+}
+
+/* Reference Links */
+.reference-item a {
+  color: var(--six-yellow);
+  text-decoration: none;
+  font-size: 0.65em;
+  transition: all 0.2s ease;
+  display: block;
+  /* Make whole line clickable/blocky */
+}
+
+.reference-item a:hover {
+  text-decoration: none;
+  color: #fff;
+  text-shadow: 0 0 8px var(--six-glow);
+  transform: translateX(5px);
+}
+
+/* Thanks Slide */
+.slide-thanks h1 {
+  font-family: var(--font-title);
+  font-size: 2.8em;
+}
+
+/* REVEAL UI HACKS */
+.reveal .progress {
+  color: var(--six-yellow);
+}
+
+.reveal .progress span {
+  background-color: var(--six-yellow) !important;
+}
+
+.reveal .controls {
+  color: var(--six-yellow) !important;
+}
